@@ -17,16 +17,18 @@ public class VizinhoMaisProximo {
     static int cont = -1;
     static int[][] matrizcidade = null;
     static int aux = Integer.MAX_VALUE;
-    static int limite = 58;
-    static int[] guardacaminho = new int[limite];
-    static boolean[] visit = new boolean[limite];
+    static int limite;
+    static int[] guardacaminho = null;
+    static boolean[] visit = null;
     static LeituraArquivo ler = new LeituraArquivo();
     static int valorCaminho = 0;
 
     public VizinhoMaisProximo(String arquivo) throws IOException {
 
         matrizcidade = ler.ler(arquivo);
-
+        VizinhoMaisProximo.limite = matrizcidade.length;
+        guardacaminho = new int[limite];
+        visit = new boolean[limite];
     }
 
     public static void achaProximo(int cidade) {
