@@ -48,13 +48,20 @@ public class VizinhoMaisProximo {
             valorCaminho += matrizcidade[cidade][guardaproximo];
             guardacaminho[cidade] = guardaproximo;
             cidade = guardaproximo;
+            
         }
+        //System.out.println(guardacaminho[57]);
+        valorCaminho += matrizcidade[guardacaminho[guardacaminho[0]]][0];
     }
 
     public void printvet() {
-        for (int i = 0; i < limite; i++) {
+        int cont = -1;
+        int i = 0;
+        while(cont++ < limite - 1){
             System.out.print(guardacaminho[i] + " ");
+            i = guardacaminho[i];
         }
-        System.out.println("");
+        
+        System.out.println("\n");
     }
 }

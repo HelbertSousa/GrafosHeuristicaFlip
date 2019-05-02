@@ -5,6 +5,7 @@
  */
 package brazil58;
 
+import static brazil58.VizinhoMaisProximo.guardacaminho;
 import java.io.IOException;
 import static java.util.Arrays.sort;
 import java.util.Iterator;
@@ -43,9 +44,10 @@ public class Brazil58 {
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
         VizinhoMaisProximo.achaProximo(0);
-        sort(VizinhoMaisProximo.guardacaminho);
+ //       sort(VizinhoMaisProximo.guardacaminho);
         visit.printvet();
         System.out.println("Valor do Caminho pelo Vizinho mais Próximo: " + VizinhoMaisProximo.valorCaminho);
+        
     }
 
 }
