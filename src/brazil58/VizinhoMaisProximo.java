@@ -6,7 +6,6 @@
 package brazil58;
 
 import java.io.IOException;
-import java.math.BigInteger;
 
 /**
  *
@@ -44,24 +43,40 @@ public class VizinhoMaisProximo {
                     }
                 }
             }
-            visit[guardaproximo] = true;
             valorCaminho += matrizcidade[cidade][guardaproximo];
             guardacaminho[cidade] = guardaproximo;
             cidade = guardaproximo;
             
         }
-        //System.out.println(guardacaminho[57]);
+        //System.out.println(matrizcidade[guardacaminho[0]][0]);
+        //Finalizar o grafo da última cidade ligando-a a primeira.
         valorCaminho += matrizcidade[guardacaminho[guardacaminho[0]]][0];
     }
 
     public void printvet() {
-        int cont = -1;
+        int parada = -1;
         int i = 0;
-        while(cont++ < limite - 1){
+        while(parada++ < limite - 1){
             System.out.print(guardacaminho[i] + " ");
             i = guardacaminho[i];
         }
         
         System.out.println("\n");
+    }
+    
+    public static String toGraphViz(int vetor[]){
+        
+        StringBuilder s = new StringBuilder();
+        String SL = System.getProperty("line.separator");
+        s.append("graph G { graph [splines = true] node [height=0.4 shape=circle style=filled]").append(SL);
+        for (int v = 0; v < vetor.length; v++){
+            s.append(v).append(" [ label= \"node = v").append(v).append("\" color = \"blue\"] ;").append(SL);
+        }
+        for(int v = 0; v < vetor.length; v++){
+            s.append(v).append(" -- ").append(vetor[v]).append(";").append(SL);
+        }
+        s.append("}");
+
+        return s.toString();
     }
 }

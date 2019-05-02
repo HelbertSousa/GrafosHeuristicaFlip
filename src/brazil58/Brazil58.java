@@ -39,11 +39,12 @@ public class Brazil58 {
 
         LeituraArquivo ler = new LeituraArquivo();
         ler.ler(arquivo);
-        ler.print();
+//        ler.print();
 
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
         VizinhoMaisProximo.achaProximo(0);
+ //       System.out.println(VizinhoMaisProximo.toGraphViz(guardacaminho));
  //       sort(VizinhoMaisProximo.guardacaminho);
         visit.printvet();
         System.out.println("Valor do Caminho pelo Vizinho mais Próximo: " + VizinhoMaisProximo.valorCaminho);
