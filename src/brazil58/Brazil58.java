@@ -5,10 +5,7 @@
  */
 package brazil58;
 
-import static brazil58.VizinhoMaisProximo.guardacaminho;
 import java.io.IOException;
-import static java.util.Arrays.sort;
-import java.util.Iterator;
 
 /**
  *
@@ -18,6 +15,7 @@ public class Brazil58 {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
