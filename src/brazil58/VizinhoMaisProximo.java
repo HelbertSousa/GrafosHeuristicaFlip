@@ -32,6 +32,7 @@ public class VizinhoMaisProximo {
 
     public static void achaProximo(int cidade) {
         int guardaproximo = 0;
+        int primeiracidade = cidade;
         while (!(cont++ == limite - 2)) {
             aux = Integer.MAX_VALUE;
             visit[cidade] = true;
@@ -48,9 +49,8 @@ public class VizinhoMaisProximo {
             cidade = guardaproximo;
             
         }
-        //System.out.println(matrizcidade[guardacaminho[0]][0]);
         //Finalizar o grafo da última cidade ligando-a a primeira.
-        valorCaminho += matrizcidade[guardacaminho[guardacaminho[0]]][0];
+        valorCaminho += matrizcidade[guardaproximo][primeiracidade];
     }
 
     public void printvet() {

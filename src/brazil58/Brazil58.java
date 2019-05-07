@@ -41,12 +41,13 @@ public class Brazil58 {
 
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
-        VizinhoMaisProximo.achaProximo(0);
- //       System.out.println(VizinhoMaisProximo.toGraphViz(guardacaminho));
- //       sort(VizinhoMaisProximo.guardacaminho);
+
+        System.out.println(VizinhoMaisProximo.toGraphViz(VizinhoMaisProximo.guardacaminho));
+
         visit.printvet();
         System.out.println("Valor do Caminho pelo Vizinho mais Próximo: " + VizinhoMaisProximo.valorCaminho);
-        
+
+//       visit.printnormal(VizinhoMaisProximo.guardacaminho);
     }
 
 }
