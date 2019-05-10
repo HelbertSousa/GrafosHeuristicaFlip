@@ -64,6 +64,12 @@ public class VizinhoMaisProximo {
         System.out.println("\n");
     }
     
+    public void print(){
+        for (int i : guardacaminho) {
+            System.out.println(i + " --> " + guardacaminho[i]);
+        }
+    }
+    
     public static String toGraphViz(int vetor[]){
         
         StringBuilder s = new StringBuilder();

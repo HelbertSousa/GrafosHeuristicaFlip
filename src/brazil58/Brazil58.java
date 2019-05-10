@@ -6,12 +6,35 @@
 package brazil58;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  *
  * @author 2015.1.08.026
  */
 public class Brazil58 {
+
+    /**
+     *
+     * @param guardarcaminho
+     * @return
+     */
+    public static long somaPercurso(ArrayList guardarcaminho) {
+        int valorcaminho = 0;
+        for (int i = 0; i < VizinhoMaisProximo.guardacaminho.length; i++) {
+            valorcaminho += VizinhoMaisProximo.matrizcidade[i][(int) guardarcaminho.get(i)];
+        }
+        return valorcaminho;
+    }
+
+    public static void print(ArrayList caminho) {
+        for (int i = 0; i < 58; i++) {
+            System.out.print(caminho.get(i) + " ");
+        }
+        System.out.println("");
+    }
 
     /**
      * @param args the command line arguments
@@ -41,12 +64,53 @@ public class Brazil58 {
 
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
+        VizinhoMaisProximo.achaProximo(4);//Melhor caminho alcançado
+//        System.out.println(VizinhoMaisProximo.toGraphViz(VizinhoMaisProximo.guardacaminho));
 
-        System.out.println(VizinhoMaisProximo.toGraphViz(VizinhoMaisProximo.guardacaminho));
+        ArrayList guardarcaminho = new ArrayList(VizinhoMaisProximo.guardacaminho.length);
+        for (int i = 0; i < VizinhoMaisProximo.guardacaminho.length; i++) {
+            guardarcaminho.add(VizinhoMaisProximo.guardacaminho[i]);
+        }
 
-        visit.printvet();
-        System.out.println("Valor do Caminho pelo Vizinho mais Próximo: " + VizinhoMaisProximo.valorCaminho);
+        long rndd = 1;
+        Random rnd = new Random(rndd);
 
+//        for (int j = 0; j < 10; j++) {
+//            for (int i = 0; i < VizinhoMaisProximo.limite; i++) {
+//                Collections.shuffle(guardarcaminho, rnd);
+//            }
+//            print(guardarcaminho);
+//            System.out.println(somaPercurso(guardarcaminho));
+//            
+//        }
+        int cont = 0; int cont2 = 0;
+        long somaPercurso;
+        long melhorCaminho;
+        melhorCaminho = (long) VizinhoMaisProximo.valorCaminho;
+
+        for (int i = 0; i < VizinhoMaisProximo.limite; i++) {
+
+            for (int j = 0; j < VizinhoMaisProximo.limite && i != j; j++) {
+
+                Collections.swap(guardarcaminho, i, j);
+
+                somaPercurso = somaPercurso(guardarcaminho);
+                if (melhorCaminho < somaPercurso) {
+                    Collections.swap(guardarcaminho, i, j);
+                    cont++;
+                } else if (somaPercurso > Integer.MAX_VALUE) {
+                    melhorCaminho = somaPercurso;
+                    System.out.println(melhorCaminho + " " + i + " " + j);
+                    cont2++;
+                }
+
+            }
+        }
+        
+
+        //       visit.printvet();
+        //     visit.print();
+        //       System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
 //       visit.printnormal(VizinhoMaisProximo.guardacaminho);
     }
 
