@@ -19,8 +19,6 @@ public class Brazil58 {
      * @param guardarcaminho
      * @return
      */
-    
-
     public static void print(ArrayList caminho) {
         for (int i = 0; i < caminho.size(); i++) {
             System.out.print(caminho.get(i) + " ");
@@ -42,27 +40,28 @@ public class Brazil58 {
 
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
-        VizinhoMaisProximo.achaProximo(10);//Melhor caminho, a partir do vizinho mais proximo, alcançado
+        VizinhoMaisProximo.achaProximo(4);//Melhor caminho, a partir do vizinho mais proximo, alcançado
         System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
-        
+
         // Transformando a forma de guardar o vetor resposta de vetor primitivo de int para vetor de objetos ArrayList
         ArrayList<Integer> guardarcaminho = new ArrayList(VizinhoMaisProximo.guardacaminho.length);
         for (int i = 0; i < VizinhoMaisProximo.guardacaminho.length; i++) {
             guardarcaminho.add(VizinhoMaisProximo.guardacaminho[i]);
         }
-        
+
         //Adicionar ligaçao do ultimo vertice ao primeiro
         guardarcaminho.add(VizinhoMaisProximo.guardacaminho[0]);
-        
-        VizinhoMaisProximo.opt3(guardarcaminho);
-        
+
+        ArrayList<Integer> opt3;
+        opt3 = VizinhoMaisProximo.opt3(guardarcaminho);
+        System.out.println(VizinhoMaisProximo.somaPercurso(opt3));
 
         System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
-    }
 
+
+    }
 }
 
-    
 /*long rndd = 1;
         Random rnd = new Random(rndd);
 
@@ -74,8 +73,7 @@ public class Brazil58 {
             System.out.println(somaPercurso(guardarcaminho));
             
         }
-*/
-
+ */
 //        int cont = 0; int cont2 = 0;
 //        long somaPercurso;
 //        long melhorCaminho;
@@ -99,8 +97,6 @@ public class Brazil58 {
 //
 //            }
 //        }
-
-
 //        int[][] matriz = { 
 //                {Integer.MAX_VALUE,3,5,48,48,8,8},
 //                {3,Integer.MAX_VALUE,3,48,48,8,8},

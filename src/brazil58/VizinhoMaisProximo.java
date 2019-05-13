@@ -58,7 +58,7 @@ public class VizinhoMaisProximo {
         valorCaminho += matrizcidade[guardaproximo][primeiracidade];
     }
 
-    public static long somaPercurso(ArrayList guardarcaminho) {
+    public static long somaPercurso(ArrayList<Integer> guardarcaminho) {
         int valorcaminho = 0;
         for (int i = 0; i < VizinhoMaisProximo.guardacaminho.length - 1; i++) {
             valorcaminho += VizinhoMaisProximo.matrizcidade[i][(int) guardarcaminho.get(i)];
@@ -76,35 +76,70 @@ public class VizinhoMaisProximo {
         }
         vetor.set(limite, vetor.get(0));
     }
-    
-    public static void opt2(){
+
+    public static void opt2(int numIteracoes, ArrayList vetor) {
+        int parada = 0;
+        while(parada < numIteracoes){
+            for (int i = 1; i < limite; i++) {
+                for (int k = i + 1; k < limite; k++) {
+                    flip(i,k, vetor);
+                }
+            }
+        }
         
+        /*repeat until no improvement is made {
+       start_again:
+       best_distance = calculateTotalDistance(existing_route)
+       for (i = 1; i < number of nodes eligible to be swapped - 1; i++) {
+           for (k = i + 1; k < number of nodes eligible to be swapped; k++) {
+               new_route = 2optSwap(existing_route, i, k)
+               new_distance = calculateTotalDistance(new_route)
+               if (new_distance < best_distance) {
+                   existing_route = new_route
+                   best_distance = new_distance
+                   goto start_again
+               }
+           }
+       }
+   }*/
+
     }
 
     static ArrayList opt3(ArrayList<Integer> caminho) {
-        ArrayList caminhoencontrado = null;
+        ArrayList<Integer> caminhoencontrado = new ArrayList();
         long somaPercurso;
-        ArrayList caminhoantigo = new ArrayList(caminho.size());
-        
+        ArrayList<Integer> caminhoantigo = new ArrayList<>();
+        for (int k = 0; k < caminho.size(); k++) {
+            caminhoantigo.add(caminho.get(k));
+            caminhoencontrado.add(0);
+        }
         for (int i = 1; i < limite % 2 + limite / 2; i++) {
-                for (int j = 0; j < limite; j++) {
-                    for (int k = 0; k < caminho.size(); k++) {
-                        caminhoantigo.add(caminho.get(k));
-                    }
-                    flip(i, (i + j) % limite, caminho);
+            for (int j = 0; j < limite; j++) {
+                for (int k = 0; k < caminho.size(); k++) {
+                    caminhoantigo.set(k, caminho.get(k));
+                }
+                for (int verticefinal = 0; verticefinal < caminho.size(); verticefinal++) {
+
+                    flip(i, (i + verticefinal) % limite, caminho);
                     somaPercurso = somaPercurso(caminho);
-                    
-                    if ((somaPercurso < VizinhoMaisProximo.valorCaminho) && (somaPercurso > 0)) {                   
+
+                    if ((somaPercurso < VizinhoMaisProximo.valorCaminho) && (somaPercurso > 0)) {
                         valorCaminho = somaPercurso;
-                        
+                        for (int k = 0; k < caminho.size(); k++) {
+                            caminhoencontrado.set(k, caminho.get(k));
+                        }
+                    } else {
+                        for (int k = 0; k < caminho.size(); k++) {
+                            caminho.set(k, caminhoantigo.get(k));
+                        }
                     }
-                    for(int k = 0; k < caminho.size(); k++) caminhoantigo.get(i) = [k];
                 }
             }
+        }
         return caminhoencontrado;
     }
 
-    public void printvet() {
+    public static void printvet() {
         int parada = -1;
         int i = 0;
         while (parada++ < limite - 1) {
