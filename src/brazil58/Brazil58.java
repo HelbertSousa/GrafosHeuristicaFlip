@@ -7,9 +7,6 @@ package brazil58;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.function.Consumer;
 
 /**
  *
@@ -45,8 +42,8 @@ public class Brazil58 {
 
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
-        VizinhoMaisProximo.achaProximo(4);//Melhor caminho alcançado
-
+        VizinhoMaisProximo.achaProximo(10);//Melhor caminho, a partir do vizinho mais proximo, alcançado
+        System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
         
         // Transformando a forma de guardar o vetor resposta de vetor primitivo de int para vetor de objetos ArrayList
         ArrayList<Integer> guardarcaminho = new ArrayList(VizinhoMaisProximo.guardacaminho.length);
@@ -56,9 +53,11 @@ public class Brazil58 {
         
         //Adicionar ligaçao do ultimo vertice ao primeiro
         guardarcaminho.add(VizinhoMaisProximo.guardacaminho[0]);
-        VizinhoMaisProximo.flip(1, 9, guardarcaminho);
+        
+        VizinhoMaisProximo.opt3(guardarcaminho);
+        
 
-        //       System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
+        System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
     }
 
 }

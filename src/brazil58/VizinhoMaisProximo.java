@@ -25,7 +25,7 @@ public class VizinhoMaisProximo {
     static int[] guardacaminho = null;
     static boolean[] visit = null;
     static LeituraArquivo ler = new LeituraArquivo();
-    static int valorCaminho = 0;
+    static long valorCaminho = 0;
 
     public VizinhoMaisProximo(String arquivo) throws IOException {
 
@@ -74,30 +74,34 @@ public class VizinhoMaisProximo {
             inicio++;
             fim--;
         }
-        System.out.println("limite" + limite);
         vetor.set(limite, vetor.get(0));
-        System.out.println("lenght" + vetor.size());
+    }
+    
+    public static void opt2(){
+        
     }
 
-    public static void opt2(ArrayList<Integer> caminho) {
+    static ArrayList opt3(ArrayList<Integer> caminho) {
+        ArrayList caminhoencontrado = null;
         long somaPercurso;
-
+        ArrayList caminhoantigo = new ArrayList(caminho.size());
+        
         for (int i = 1; i < limite % 2 + limite / 2; i++) {
-            for (int j = 0; j < limite; j++) {
-                List <Integer> caminhoatual = new ArrayList(caminho.size());
-                
-                somaPercurso = somaPercurso(caminho);
-                if (VizinhoMaisProximo.valorCaminho < somaPercurso) {
-                    Collections.swap(guardarcaminho, i, j);
-                    cont++;
-                } else if (somaPercurso > Integer.MAX_VALUE) {
-                    melhorCaminho = somaPercurso;
-                    System.out.println(melhorCaminho + " " + i + " " + j);
-                    cont2++;
+                for (int j = 0; j < limite; j++) {
+                    for (int k = 0; k < caminho.size(); k++) {
+                        caminhoantigo.add(caminho.get(k));
+                    }
+                    flip(i, (i + j) % limite, caminho);
+                    somaPercurso = somaPercurso(caminho);
+                    
+                    if ((somaPercurso < VizinhoMaisProximo.valorCaminho) && (somaPercurso > 0)) {                   
+                        valorCaminho = somaPercurso;
+                        
+                    }
+                    for(int k = 0; k < caminho.size(); k++) caminhoantigo.get(i) = [k];
                 }
             }
-
-        }
+        return caminhoencontrado;
     }
 
     public void printvet() {
@@ -118,7 +122,6 @@ public class VizinhoMaisProximo {
     }
 
     public static String toGraphViz(int vetor[]) {
-
         StringBuilder s = new StringBuilder();
         String SL = System.getProperty("line.separator");
         s.append("graph G { graph [splines = true] node [height=0.4 shape=circle style=filled]").append(SL);
