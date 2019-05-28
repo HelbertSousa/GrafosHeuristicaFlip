@@ -16,6 +16,9 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
     }
 
     /**

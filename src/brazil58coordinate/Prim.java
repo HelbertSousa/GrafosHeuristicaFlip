@@ -23,59 +23,59 @@ public class Prim {
     private List<Aresta> resp;
     private double peso;
     static Aresta auxaresta = null;
-    
-    public Prim(Cities cities){
+
+    public Prim(Cities cities) {
         filaprioridade = new PriorityQueue<>();
-        for(int i = 0; i < cities.getNumberOfCities(); i++){
-            for(int j = 0; j < cities.getNumberOfCities(); j++){
-                filaprioridade.offer(new Aresta(i,j,cities.getAresta(i, j)));
+        for (int i = 0; i < cities.getNumberOfCities(); i++) {
+            for (int j = 0; j < cities.getNumberOfCities(); j++) {
+                filaprioridade.offer(new Aresta(i, j, cities.getAresta(i, j)));
             }
         }
         key = new double[cities.getNumberOfCities()];
         visit = new boolean[cities.getNumberOfCities()];
         predecessor = new int[cities.getNumberOfCities()];
-        for(int u = 0; u < cities.getNumberOfCities(); u++){
-            key[u]= Double.MAX_VALUE;
-            visit[u]= false;
-        }        
+        for (int u = 0; u < cities.getNumberOfCities(); u++) {
+            key[u] = Double.MAX_VALUE;
+            visit[u] = false;
+        }
         resp = new LinkedList<>();
-        
     }
-    public RespostaKruskalPrim prim(Cities cities){
+
+    public RespostaKruskalPrim prim(Cities cities) {
         RespostaKruskalPrim result = new RespostaKruskalPrim();
         key[0] = 0;
         predecessor[0] = 0;
-        
-        while(!filaprioridade.isEmpty()){
+
+        while (!filaprioridade.isEmpty()) {
             auxaresta = filaprioridade.remove();
             resp.add(auxaresta);
-            
             int u = auxaresta.getOrigem();
-            
             filaprioridade.remove();
-            
-            for(Integer v : cities.getAdjacent(u)){
+
+            for (Integer v : cities.getAdjacent(u)) {
                 if (!visit[u]
-                        && cities.getAresta(u, v) < key[v]){//duvida em como comparar se existe tal aresta em resp
-                        key[v] = cities.getAresta(u, v);
-                        filaprioridade.add(cities.getInstanciaAresta(u, v));
-                        predecessor[v] = u;
-                        
+                        && cities.getAresta(u, v) < key[v]) { //Encontra menor peso/distancia
+                    key[v] = cities.getAresta(u, v);
+                    filaprioridade.add(cities.getInstanciaAresta(u, v));
+                    predecessor[v] = u;
+
                 }
                 visit[v] = true;
             }
-            
         }
-        for(int i = 0; i < key.length; i++){
-                peso += key[i];
+        
+        for (int i = 0; i < key.length; i++) {
+            peso += key[i];
         }
-//        for(int i = 0; i < predecessor.length; i++){
-//                System.out.println("n = " + predecessor[i]);
+        
+//        for (int i = 0; i < predecessor.length; i++) {
+//            System.out.println("n = " + predecessor[i]);
 //        }
+        
         System.out.println(peso);
         result.peso = peso;
         result.resp = predecessor;
-        
+
         return result;
     }
 }

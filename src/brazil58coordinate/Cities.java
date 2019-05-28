@@ -18,6 +18,10 @@ public class Cities {
     private List<Point2D.Double> cities;
     Point2D.Double city = null;
     private double[][] matrizcidade = null;
+
+    public double[][] getMatrizcidade() {
+        return matrizcidade;
+    }
     private final int numberOfCities;
 
     Cities(int numberOfCities) {

@@ -37,11 +37,16 @@ public class Aresta implements Comparable<Aresta> {
     public double getDistance() {
         return this.distancia;
     }
-    
-    
+
+    @Override
     public int compareTo(Aresta o) {
-        if(this.distancia > o.distancia) {return 1;}
-        else if(this.distancia < o.distancia ) {return -1;}
-        else {return 0;}
+        if (this.distancia > o.distancia) {
+            return 1;
+        } else if (this.distancia < o.distancia) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
+
 }
