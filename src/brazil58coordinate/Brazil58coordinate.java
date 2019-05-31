@@ -25,13 +25,13 @@ import javax.swing.JPanel;
 public class Brazil58coordinate {
 
     public static void main(String[] args) throws IOException {
-        String arquivo = "pontos.agm1";
+        String arquivo = "brazil58coordinates.tsp.txt";
         LeituraArquivo leitura = new LeituraArquivo();
 
         Cities cities = leitura.ler(arquivo);
-        RespostaKruskalPrim respprim = new RespostaKruskalPrim();
-        Prim prim = new Prim(cities);
-        respprim = prim.prim(cities);
+//        RespostaKruskalPrim respprim = new RespostaKruskalPrim();
+//        Prim prim = new Prim(cities);
+//        respprim = prim.prim(cities);
 
         Cities cities2 = leitura.ler(arquivo);
         RespostaKruskalPrim respkrus = new RespostaKruskalPrim();
@@ -40,30 +40,16 @@ public class Brazil58coordinate {
         
         List<Integer> resposta = new ArrayList<>();
         for (int i = 0; i < 58; i++) {
-            resposta.add(i);
+            resposta.add(respkrus.resp[i]);
         }
         
-        Plotar plot;
-        plot = new Plotar(resposta, cities.getMatrizcidade());
+//        Plotar plot;
+//        plot = new Plotar(resposta, cities.getMatrizcidade());
         
-        Frame myFrame = new Frame();
-        Toolkit kit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = kit.getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-        myFrame.setSize(screenWidth / 2, screenHeight / 2);
-
-        myFrame.setVisible(true);
-        JFrame frame = new JFrame();
-        frame.setSize(400, 400);
-        frame.setTitle("Grafo");
-
+        krus.Desenha(resposta, cities.getMatrizcidade());
+        
         List<Point2D.Double> citypoints = new ArrayList<Point2D.Double>();
         citypoints = cities.getCities();
-        
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        
     }
 }

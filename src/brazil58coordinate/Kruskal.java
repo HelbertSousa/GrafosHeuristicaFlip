@@ -6,15 +6,19 @@
 package brazil58coordinate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JFrame;
+
 
 /**
  *
  * @author 2015.1.08.026
  */
 public class Kruskal {
-
+    
+    JFrame Painel = new JFrame();
     private double peso;
     private int edgesaux, num = 0;
 
@@ -55,6 +59,11 @@ public class Kruskal {
             System.out.println(r + " -> " + pai[r]);
         }
 
+        Painel.repaint();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+        }
         System.out.println(peso);
         result.peso = peso;
         result.resp = pai;
@@ -73,5 +82,15 @@ public class Kruskal {
         int fy = find(y);
         pai[fx] = fy;
     }
-
+    
+    public void Desenha(List<Integer> lista, double[][] matriz) {
+        Painel.setSize(650, 650);
+        Painel.setTitle("Rotas");
+        Painel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Painel.setVisible(true);
+        //chama qual metodo que vai gerar o grafico
+        Plotar partess;
+        partess = new Plotar(lista, matriz);
+        Painel.add(partess);
+    }
 }
