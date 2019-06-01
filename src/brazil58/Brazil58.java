@@ -7,6 +7,7 @@ package brazil58;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -14,11 +15,7 @@ import java.util.ArrayList;
  */
 public class Brazil58 {
 
-    /**
-     *
-     * @param guardarcaminho
-     * @return
-     */
+
     public static void print(ArrayList caminho) {
         for (int i = 0; i < caminho.size(); i++) {
             System.out.print(caminho.get(i) + " ");
@@ -37,30 +34,45 @@ public class Brazil58 {
 
         LeituraArquivo ler = new LeituraArquivo();
         ler.ler(arquivo);
-
         VizinhoMaisProximo visit;
         visit = new VizinhoMaisProximo(arquivo);
-        VizinhoMaisProximo.achaProximo(4);//Melhor caminho, a partir do vizinho mais proximo, alcançado
-        System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
 
-        // Transformando a forma de guardar o vetor resposta de vetor primitivo de int para vetor de objetos ArrayList
-        ArrayList<Integer> guardarcaminho = new ArrayList(VizinhoMaisProximo.guardacaminho.length);
-        for (int i = 0; i < VizinhoMaisProximo.guardacaminho.length; i++) {
-            guardarcaminho.add(VizinhoMaisProximo.guardacaminho[i]);
+        int[] achaProximo = VizinhoMaisProximo.achaProximo(0); //Melhor caminho, a partir do vizinho mais proximo, alcançado
+        VizinhoMaisProximo.printvet();
+        System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
+        System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.somaPercurso(achaProximo));
+        
+        for (int i = 0; i < 58; i++) {
+            System.out.print(VizinhoMaisProximo.guardacaminho[i] + " ");
+        }
+        System.out.println(" ");
+        for (int i = 0; i < 58; i++) {
+            System.out.print(achaProximo[i] + " ");
+        }
+        System.out.println("");
+
+        //Transformando a forma de guardar o vetor resposta de vetor primitivo de int para vetor de Integer ArrayList
+        ArrayList<Integer> guardarcaminhoOpt2 = new ArrayList<>();
+        for (int i = 0; i < achaProximo.length; i++) {
+            guardarcaminhoOpt2.add(achaProximo[i]);
         }
 
-        //Adicionar ligaçao do ultimo vertice ao primeiro
-        guardarcaminho.add(VizinhoMaisProximo.guardacaminho[0]);
+        guardarcaminhoOpt2 = VizinhoMaisProximo.opt2(guardarcaminhoOpt2);
+        System.out.println("Opt2: " + VizinhoMaisProximo.somaPercurso(guardarcaminhoOpt2));
 
-        ArrayList<Integer> opt3;
-        opt3 = VizinhoMaisProximo.opt3(guardarcaminho);
-        System.out.println(VizinhoMaisProximo.somaPercurso(opt3));
-
-        System.out.println("Valor do caminho encontrado: " + VizinhoMaisProximo.valorCaminho);
-
+//        guardarcaminhoOpt2 = VizinhoMaisProximo.opt3(guardarcaminhoOpt2);
+//        System.out.println(VizinhoMaisProximo.somaPercurso(guardarcaminhoOpt2));
+        ArrayList<Integer> guardarcaminhoOpt3 = new ArrayList<>();
+        for (int i = 0; i < VizinhoMaisProximo.guardacaminho.length; i++) {
+            guardarcaminhoOpt3.add(VizinhoMaisProximo.guardacaminho[i]);
+        }
+//        
+        ArrayList<Integer> opt3 = VizinhoMaisProximo.opt3(guardarcaminhoOpt3);
+        System.out.println("Opt3: " + VizinhoMaisProximo.somaPercurso(opt3));
 
     }
 }
+
 
 /*long rndd = 1;
         Random rnd = new Random(rndd);
